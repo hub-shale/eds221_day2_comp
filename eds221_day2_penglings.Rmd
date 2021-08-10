@@ -1,0 +1,38 @@
+---
+title: "eds221_day2_penglings"
+author: "Shale"
+date: "8/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(palmerpenguins)
+library(tidyverse)
+library(dplyr)
+```
+
+# Penglin' Wranglin'
+
+plot of flipper length by body mass converted to Kg, for Adelie penguins
+
+```{r}
+adelie_mods = penguins %>% filter(species == "Adelie") %>% 
+  mutate(body_mass_kg = body_mass_g / 1000)
+
+
+# check to see if the filter() worked
+unique(penguins$species)
+unique(adelie_mods$species)
+  
+```
+
+
+```{r}
+ggplot(data = adelie_mods, aes(x = body_mass_kg, y = flipper_length_mm)) +
+  geom_point(aes(color = island)) +
+  facet_wrap(~island)
+
+```
+
+

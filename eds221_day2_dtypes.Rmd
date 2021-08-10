@@ -1,0 +1,101 @@
+---
+title: "Making & Indexing Data in R"
+author: "Shale"
+date: "8/10/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Vector review
+
+```{r}
+# all data within a vector must be the same data class
+# if inputs have different classes, data will be coerced into most inclusive class
+dogs = c("forklift", "panda", "sebastian")
+class(dogs)
+
+dogs_quant = c("forklift", "panda", "sebastian", 4)
+class(dogs_quant) # is still 'character' class, '4' is coerced from an integer
+
+dog_age = c(20, 9, 2)
+class(dog_age)
+typeof(dog_age) # higher precision for numerics (double, integer)
+# note that R automatically saves as doubles, even though all values here are whole numbers
+
+dog_num = c(1L, 2L, 3L, 2L, 3L, 2L)
+class(dog_num)
+typeof(dog_num)
+# use 'L' after an integer to make sure it is saved as an integer
+
+# or
+dog_age_int = as.integer(dog_age)
+class(dog_age_int)
+```
+
+
+## less simple vectors
+
+```{r}
+# 
+dog_food = c(sebastian = "none", forklift = "chicken", panda = "any")
+dog_food
+dog_food[3]
+class(dog_food)
+
+```
+
+
+```{r}
+cars = c("Ford", "GMC", "Suby", "Toyota", "Honda", "Mitsubishi", "Ferarri", "Tesla")
+cars[]
+cars[2:5]
+cars[dog_age[3]]
+i = 4
+cars[i]
+
+
+my_ride = cars[dog_age[]]
+my_ride
+class(my_ride)
+```
+
+
+# Lists
+
+```{r}
+kelp = list("blue", 42, TRUE, c("green", "pink"), c(18, 3), c(TRUE, FALSE))
+kelp
+# [[]] refers to element of the list (more useful than [])
+# [] refers to the position of the value within its element in the list
+kelp[[4]]
+kelp[4]
+
+```
+
+```{r}
+lunch = list(Mexican = c("taco", "burrito", "huevos", "carne"), Italian = c("pasta", "pizza", "calzone"), American = c("burger", "pizza", "shake", "hot dog", "fries"))
+
+lunch
+lunch[1]
+lunch[[1]]
+lunch$Italian # this is the same as lunch[[2]]
+```
+
+# Data frames
+
+The important stuff
+
+```{r}
+fruit = data.frame(type = c("apple", "orange", "canteloupe", "watermelon", "blackberry", "starfruit"),
+                   mass_lbs = c(0.5, 0.6, 3.2, 5.7, 0.02, 0.4))
+fruit
+fruit$type
+fruit[,1]
+fruit[1,]
+
+```
+
+
